@@ -9,7 +9,7 @@ import BASE_URL from '../config';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {Link} from "react-router-dom";
 
 const TopMenu=()=>{
      const [input, setInput] = useState({});
@@ -49,9 +49,12 @@ const TopMenu=()=>{
         <Container>
           <Navbar.Brand href="#home">Online E-Appointment</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="searchdoctor">Search Doctor</Nav.Link>
+
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing" onClick={handleShow}>Doctor Registration</Nav.Link>
+            <Nav.Link as={Link} to="doctorlogin">Doctor Login</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

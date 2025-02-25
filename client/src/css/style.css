@@ -13,3 +13,22 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+#doclogin 
+{
+    width: 500px;
+    margin: auto;
+}
+
+#dotordashboard
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+#docleftmenu
+{
+    width: 15%;
+    background-color: black;
+    color: white;
+}

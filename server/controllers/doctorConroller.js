@@ -31,7 +31,40 @@ const doctorHomeDisplay=async( req, res) =>{
     }
 }
 
+const doctorLogin =async(req, res)=>{
+   const { email, password} = req.body;
+   
+   try {
+    const Doctor = await DoctorModel.findOne({email:email});
+    if (!Doctor)
+    {
+      res.status(400).send({msg:"Invalid Email!"})
+    }
+
+    if (Doctor.password!=password)
+    {
+        res.status(400).send({msg:"Invalid Credentials!"});
+    }
+
+    res.status(200).send(Doctor);
+
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+const doctorSearch=async(req, res)=>{
+  const { name, speciality}=req.body;
+   
+  const Doctor = await DoctorModel.find({$or:[{"name":name}, {"specailization":speciality}]})
+  console.log(Doctor);
+  res.status(200).send(Doctor);
+}
+
+
 module.exports ={
     doctorRegistration,
-    doctorHomeDisplay
+    doctorHomeDisplay,
+    doctorLogin,
+    doctorSearch
 }

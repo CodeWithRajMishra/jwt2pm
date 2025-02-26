@@ -3,9 +3,13 @@ import BASE_URL from "../config";
 import axios from "axios";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from "react-router-dom";
+
 
 const Home=()=>{
 const [mydata, setMydata] = useState([]);
+
+const navigate= useNavigate();
 const loadData=async()=>{
     let api=`${BASE_URL}/doctor/homedoctorsdisplay`;
     try {
@@ -22,6 +26,11 @@ useEffect(()=>{
 }, []);
 
 
+const patApointment=(id)=>{
+    navigate(`/patientapp/${id}`)
+}
+
+
 const ans= mydata.map((key)=>{
     return(
         <>
@@ -33,7 +42,7 @@ const ans= mydata.map((key)=>{
           Address : {key.address} City : {key.city} Mobile : {key.mobile}
           Email : {key.email}
         </Card.Text>
-        <Button variant="primary">Appointemtn Now!</Button>
+        <Button variant="primary" onClick={()=>{patApointment(key._id)}}>Appointemtn Now!</Button>
       </Card.Body>
     </Card>
         

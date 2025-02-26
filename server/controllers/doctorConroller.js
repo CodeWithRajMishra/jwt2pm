@@ -1,5 +1,5 @@
 const DoctorModel= require("../models/doctorModel");
-
+const PateintModel= require("../models/patientModel");
 
 const doctorRegistration=async(req, res)=>{
     const {name,address, city, mobile,speciality,email, password} = req.body; 
@@ -61,10 +61,18 @@ const doctorSearch=async(req, res)=>{
   res.status(200).send(Doctor);
 }
 
+const patientlist=async(req, res)=>{
+    const {docid} = req.query;
+    const Pateint = await  PateintModel.find({doctorId:docid})
+     res.status(200).send(Pateint);
+}
+
+
 
 module.exports ={
     doctorRegistration,
     doctorHomeDisplay,
     doctorLogin,
-    doctorSearch
+    doctorSearch,
+    patientlist
 }

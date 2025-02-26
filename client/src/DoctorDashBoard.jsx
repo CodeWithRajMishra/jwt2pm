@@ -1,8 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, Link, Outlet } from "react-router-dom";
 
 const DoctorDashBoard=()=>{
- const navigate = useNavigate();
-  const logout=()=>{
+
+   const navigate = useNavigate();
+
+   useEffect(()=>{
+      if (!localStorage.getItem("name"))
+      {
+         navigate("/");
+      }
+   }, []);
+
+
+   const logout=()=>{
      localStorage.clear();
      navigate("/");
   }
@@ -26,13 +37,17 @@ const DoctorDashBoard=()=>{
           <div id="dotordashboard">
                <div id="docleftmenu">
                 
-                 My Appointments
+             <Link to="mypatient">  My Appointments </Link>   
                   <br />
                   <br />
                  Patient List
                 
                  </div>
-                <div id="dashboarddata"> </div>
+                <div id="dashboarddata">
+                  
+                   <Outlet/>
+                  
+                   </div>
           </div>
         </>
     )

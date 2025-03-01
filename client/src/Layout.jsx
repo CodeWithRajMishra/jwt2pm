@@ -1,14 +1,16 @@
-import {Outlet} from "react-router-dom";
-import TopMenu from "./components/TopMenu";
-import Footer from "./components/Footer";
+import {Link, Outlet} from "react-router-dom";
 
 const Layout=()=>{
     return(
         <>
-           <TopMenu/>
+           <Link to="home">Home</Link> |
+           <Link to="login">Login</Link> |
+           <Link to="registration"> Registration</Link>
+           <hr />
               <Outlet/>
-           <Footer/>
         
+           <hr />
+           www.mycompany.com all right rserved. 2025 &copy;
         </>
     )
 }

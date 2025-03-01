@@ -1,11 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
-import DoctorLogin from "./pages/DoctorLogin";
-import DoctorDashBoard from "./DoctorDashBoard";
-import SearchDoctor from "./pages/SearchDoctor";
-import PatientAppointment from "./pages/PatientAppointment";
-import MyPatient from "./pages/MyPatient";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import DashBoard from "./pages/DashBoard";
 const App=()=>{
   return(
     <>
@@ -13,22 +11,18 @@ const App=()=>{
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>} />
-          <Route path="doctorlogin" element={<DoctorLogin/>}/>
-          <Route path="searchdoctor" element={<SearchDoctor/>} />
-          <Route path="patientapp/:id" element={<PatientAppointment/>} />
+          <Route path="home" element={<Home/>} />
+          <Route path="registration" element={<Registration/>}/> 
+          <Route path="login" element={<Login/>}/>   
         </Route>
-      </Routes>
-      <Routes>
-         <Route path="doctordashboard" element={<DoctorDashBoard/>}>
-           <Route path="mypatient" element={<MyPatient/>}/>
-         </Route>
-      </Routes>
-
+        </Routes>
+         <Routes>
+           <Route path="dashboard" element={<DashBoard/>}>
+           </Route>
+         </Routes>
 
     </BrowserRouter>
-
     </>
   )
 }
-
 export default App;

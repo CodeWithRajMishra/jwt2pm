@@ -3,8 +3,7 @@ const app=express();
 const cors= require("cors");
 const bodyParser = require('body-parser');
 const mongoose= require("mongoose");
-const doctorRoute= require("./routes/doctorRoute");
-const patientRoute= require("./routes/patientRoute");
+const userRoute= require("./routes/userRoute");
 require("dotenv").config();
 
 app.use(cors());
@@ -18,14 +17,13 @@ mongoose.connect(process.env.DBCONN).then(()=>{
 
 
 
-app.use("/doctor", doctorRoute);
-app.use("/patient", patientRoute);
+app.use("/user", userRoute);
 
 
 
 
 
-const Port=process.env.PORT || 8080;
+const Port=process.env.PORT || 8000;
 app.listen(Port, ()=>{
     console.log(`server run on  port ${Port}`);
 })

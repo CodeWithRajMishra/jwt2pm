@@ -2,17 +2,17 @@ const UserModel= require("../models/userModel");
 
 
 const userSave=async(req, res)=>{
-  const {rollno, name, city } = req.body; 
-  const myimg= req.file.filename;
-  
-  const User= await UserModel.create({
-    rollno:rollno,
+  const imageUrls = req.files.map(file => file.path);
+  const {name, brand, price} = req.body;
+  const defaultImage= imageUrls[0];
+   const Product= await UserModel.create({
     name:name,
-    city: city,
-    image:myimg
-  })
-
-   res.send("OKKK");
+    brand:brand,
+    price: price,
+    defaultImage:defaultImage,
+    images:imageUrls
+   })
+   res.send("Product Save!!!");
 }
 
 const userDisplay=async(req, res)=>{

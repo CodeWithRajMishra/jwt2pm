@@ -19,12 +19,26 @@ const Display=()=>{
   return(
     <>
       <tr>
+       <td>
+       {key.images.map((key1)=>{
+           return(
+            <>
+               <img src={`http://localhost:8000/${key1}`}  width="40" height="40" />
+               <br/>
+            </>
+           )
+        })}
+
+       </td>
         <td> 
-          <img src={`http://localhost:8000/uploads/${key.image}`} width="100" height="100" />
-          {key.image} </td>
-        <td> {key.rollno} </td>
+       
+
+
+          <img src={`http://localhost:8000/${key.defaultImage}`} width="300" height="300" />
+           </td>
         <td> {key.name} </td>
-        <td> {key.city} </td>
+        <td> {key.brand} </td>
+        <td> {key.price} </td>
       </tr>
     </>
   )

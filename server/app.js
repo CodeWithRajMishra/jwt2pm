@@ -11,7 +11,9 @@ app.use(cors());
 app.use(bodyParser.json());
 // Parse incoming requests with urlencoded payloads
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/uploads', express.static('uploads'))
+
 mongoose.connect(process.env.DBCONN).then(()=>{
     console.log("DB connected!!!");
 })
@@ -19,8 +21,6 @@ mongoose.connect(process.env.DBCONN).then(()=>{
 
 
 app.use("/user", userRoute);
-
-
 
 
 

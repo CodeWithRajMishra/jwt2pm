@@ -1,43 +1,53 @@
 import { useState } from "react";
 import axios from "axios";
-
 const Insert=()=>{
- const [rollno, setRollno] = useState("");
- const [name, setName] = useState("");
- const [city, setCity] = useState("");
- const [image, setImage] = useState("");
+ const [input, setInput] = useState({});
+ const [images, setImages]=useState([]);
 
 
-  const handleImage=(e)=>{
-         let value=e.target.files[0];
-         setImage(value);
-         console.log(image);
-  }
-
- const handleSubmit=async()=>{
-  let api="http://localhost:8000/user/datasave";
-
-   const formData = new FormData();
-         formData.append("rollno", rollno);
-         formData.append("name", name);
-         formData.append("city", city);
-         formData.append("image", image);
-  
-      const response= await axios.post(api, formData);
-      console.log(response.data);
+ const handleInput=(e)=>{
+    let name=e.target.name;
+    let value=e.target.value;
+    setInput(values=>({...values, [name]:value}));
+    console.log(input);
  }
 
+const handleFileChange=(e)=>{
+  setImages(e.target.files);
+  console.log(images);
+}
+ // input ={name:"cpu", brand:"sony", price:3456}
+ const handleSubmit=async()=>{
+  let api="http://localhost:8000/user/datasave";
+  const formData= new FormData(); 
+  for (let key in input)
+   {
+      formData.append(key, input[key])
+   }
 
-  return(
+ for (let i = 0; i < images.length; i++) 
+  {
+  formData.append('images', images[i]);
+ }
+
+ const response=await axios.post(api, formData);
+ console.log(response.data);  
+
+
+}
+return(
     <>
       <h1> Insert Student Records</h1>
-      Enter Rollno : <input type="text" name="rollno" value={rollno} onChange={(e)=>{setRollno(e.target.value)}} />
+      Enter Product name : <input type="text" name="name"
+      onChange={handleInput} />
       <br />
-      Enter name : <input type="text" name="name" value={name} onChange={(e)=>{setName(e.target.value)}} />
+      Enter brand : <input type="text" name="brand"  
+        onChange={handleInput}  />
       <br />
-      Enter city : <input type="text" name="city" value={city} onChange={(e)=>{setCity(e.target.value)}} />
+      Enter price : <input type="text" name="price" 
+      onChange={handleInput} />
       <br />
-      Upload image : <input type="file" name="image" onChange={handleImage}    />
+      Upload images : <input type="file" multiple  onChange={handleFileChange}  />
       <br />
       <button onClick={handleSubmit}> save!!!</button>
     </>

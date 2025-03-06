@@ -43,6 +43,8 @@ route.post("/datasave", upload.array('images', 10), UserController.userSave);
 
 
 route.get("/datadisplay" , UserController.userDisplay)
+route.post("/showproduct" , UserController.productDisplay)
+
 
 module.exports = route;
 

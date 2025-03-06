@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {useNavigate}  from "react-router-dom";
 const Display=()=>{
   const [mydata, setMydata] = useState([]);
-
-
+  const navigate= useNavigate();
   const loadData=async()=>{
     let api="http://localhost:8000/user/datadisplay";
     const response = await axios.get(api);
@@ -16,6 +16,10 @@ const Display=()=>{
   }, [])
 
  const ans=mydata.map((key)=>{
+   
+  
+
+
   return(
     <>
       <tr>
@@ -24,6 +28,7 @@ const Display=()=>{
            return(
             <>
                <img src={`http://localhost:8000/${key1}`}  width="40" height="40" />
+              
                <br/>
             </>
            )
@@ -32,9 +37,12 @@ const Display=()=>{
        </td>
         <td> 
        
-
-
-          <img src={`http://localhost:8000/${key.defaultImage}`} width="300" height="300" />
+     <a href="#" onClick={()=>{navigate(`/showproduct/${key._id}`)}}>
+     <img src={`http://localhost:8000/${key.defaultImage}`} 
+           width="300" height="300" />
+     </a>
+   
+        
            </td>
         <td> {key.name} </td>
         <td> {key.brand} </td>

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {useNavigate}  from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Display=()=>{
   const [mydata, setMydata] = useState([]);
   const navigate= useNavigate();
+
   const loadData=async()=>{
     let api="http://localhost:8000/user/datadisplay";
     const response = await axios.get(api);
@@ -16,37 +17,27 @@ const Display=()=>{
   }, [])
 
  const ans=mydata.map((key)=>{
-   
-  
-
-
   return(
     <>
       <tr>
-       <td>
-       {key.images.map((key1)=>{
-           return(
-            <>
-               <img src={`http://localhost:8000/${key1}`}  width="40" height="40" />
-              
-               <br/>
-            </>
-           )
-        })}
-
-       </td>
-        <td> 
-       
-     <a href="#" onClick={()=>{navigate(`/showproduct/${key._id}`)}}>
-     <img src={`http://localhost:8000/${key.defaultImage}`} 
-           width="300" height="300" />
-     </a>
-   
-        
-           </td>
         <td> {key.name} </td>
-        <td> {key.brand} </td>
-        <td> {key.price} </td>
+        <td> {key.email} </td>
+        <td> 
+           { 
+              key.bookid.map((key1)=>{
+                  return(
+                    <>
+                      <p>{key1.bookname}, {key1.price}</p>
+                    </>
+                  )
+              })
+           }
+          
+          
+           </td>
+           <td>
+            <button onClick={()=>{navigate(`/addnewbook/${key._id}`)}}> Add New Book</button>
+           </td>
       </tr>
     </>
   )
@@ -58,10 +49,10 @@ const Display=()=>{
       <hr />
       <table>
         <tr>
+          <th> Auther Name </th>
+          <th> Email </th>
+          <th>Book Detail Name/Price </th>
           <th> </th>
-          <th> Rollno</th>
-          <th> Name</th>
-          <th> City</th>
         </tr>
         {ans}
       </table>

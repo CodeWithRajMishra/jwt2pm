@@ -6,6 +6,7 @@ const ShowProduct=()=>{
     const [prodata, setProdata]= useState({});
     const [myimages, setMyimages]= useState([]);
     const [showImage, setShowImage]= useState("");
+
     const loadData=async()=>{
         let api="http://localhost:8000/user/showproduct";
         const response = await axios.post(api, {id:id});
@@ -14,9 +15,11 @@ const ShowProduct=()=>{
         setMyimages(response.data.images);
         setShowImage(response.data.defaultImage);
       }
+
       useEffect(()=>{
         loadData();
       }, [])
+
       const ans=myimages.map(key=>{
         return(
             <>
@@ -28,6 +31,7 @@ const ShowProduct=()=>{
             </>
         )
     })
+
     return(
         <>
            <h1> Show PRoducts Dertail: {id}</h1>  
@@ -43,4 +47,5 @@ const ShowProduct=()=>{
         </>
     )
 }
+
 export default ShowProduct;
